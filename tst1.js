@@ -5,7 +5,7 @@ function initialDraw(e)
 {var surfaceContext=surface.getContext('2d');surfaceContext.drawImage(wheel,0,0);}
 function startSpin(determinedValue)
 {var stopAngle=undefined;if(spinMode=="random")
-{stopAngle=Math.floor(Math.random()*360);}
+{stopAngle=355;}
 else if(spinMode=="determinedAngle")
 {if(typeof(determinedValue)==='undefined')
 {if(determinedGetUrl)
@@ -13,15 +13,15 @@ else if(spinMode=="determinedAngle")
 else
 {if(determinedValue>360){alert("Để chơi trò này bạn cần 200 bạc.\nSố bạc trong tài khoản của bạn không đủ để chơi trò này");resetWheel();document.getElementById('spin_button').className="";wheelState='spinning';}
 else
-stopAngle=determinedValue;}}
+stopAngle=355;}}
 else if(spinMode=="determinedPrize")
 {if(typeof(determinedValue)==='undefined')
 {if(determinedGetUrl)
 {xhr.open('GET',determinedGetUrl,true);xhr.send('');}}
 else
-{stopAngle=Math.floor(prizes[determinedValue]['startAngle']+(Math.random()*(prizes[determinedValue]['endAngle']- prizes[determinedValue]['startAngle'])));}}
+{stopAngle=355;}}
 if((typeof(stopAngle)!=='undefined')&&(wheelState=='reset')&&(power))
-{stopAngle=(360+ pointerAngle)- stopAngle;targetAngle=(360*(power*6)+ stopAngle);randomLastThreshold=Math.floor(90+(Math.random()*90));document.getElementById('spin_button').className="";$(".power_controls").hide();wheelState='spinning';doSpin();}}
+{stopAngle=370;randomLastThreshold=Math.floor(90+(Math.random()*90));document.getElementById('spin_button').className="";$(".power_controls").hide();wheelState='spinning';doSpin();}}
 function ajaxCallback()
 {if(xhr.readyState<4)
 {return;}
@@ -43,7 +43,8 @@ angle=1.90;else
 angle=1;spinTimer=setTimeout("doSpin()",theSpeed);}
 else
 {wheelState='stopped';if((doPrizeDetection)&&(prizes))
-{var times360=Math.floor(currentAngle/360);var rawAngle=(currentAngle-(360*times360));var relativeAngle=355;for(x=0;x<(prizes.length);x++)
+{var times360=Math.floor(currentAngle/360);var rawAngle=(currentAngle-(360*times360));var relativeAngle=Math.floor(pointerAngle- rawAngle);if(relativeAngle<0)
+relativeAngle=360- Math.abs(relativeAngle);for(x=0;x<(prizes.length);x++)
 {if((relativeAngle>=prizes[x]['startAngle'])&&(relativeAngle<=prizes[x]['endAngle']))
 {alert("Bạn đã quay trúng "+ prizes[x]['name']+"!");$(".power_controls").show();$(".reset_controls").show();updatelog();break;}}}}}
 function DegToRad(d)
