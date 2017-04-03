@@ -43,8 +43,7 @@ angle=1.90;else
 angle=1;spinTimer=setTimeout("doSpin()",theSpeed);}
 else
 {wheelState='stopped';if((doPrizeDetection)&&(prizes))
-{var times360=Math.floor(currentAngle/360);var rawAngle=(currentAngle-(360*times360));var relativeAngle=Math.floor(pointerAngle- rawAngle);if(relativeAngle<0)
-relativeAngle=360- Math.abs(relativeAngle);for(x=0;x<(prizes.length);x++)
+{var times360=Math.floor(currentAngle/360);var rawAngle=(currentAngle-(360*times360));var relativeAngle=355;for(x=0;x<(prizes.length);x++)
 {if((relativeAngle>=prizes[x]['startAngle'])&&(relativeAngle<=prizes[x]['endAngle']))
 {alert("Bạn đã quay trúng "+ prizes[x]['name']+"!");$(".power_controls").show();$(".reset_controls").show();updatelog();break;}}}}}
 function DegToRad(d)
